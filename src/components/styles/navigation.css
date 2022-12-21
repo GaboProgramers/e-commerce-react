@@ -12,13 +12,12 @@
 }
 
 .nav__title {
+    width: 30%;
     color: #f85555;
-    display: block;
-    flex: 1 1;
     font-size: 1.5rem;
     font-weight: 700;
-    margin-left: 20px;
-    padding: 14px 20px;
+    position: relative;
+    left: 40px;
     cursor: pointer;
 }
 

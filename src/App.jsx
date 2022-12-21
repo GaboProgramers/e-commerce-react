@@ -7,6 +7,8 @@ import { getProductsThunk } from './store/slices/products.slice'
 import ProductInfo from './pages/ProductInfo'
 import FooterDescription from './components/FooterDescription'
 import Navigation from './components/Navigation'
+import Login from './pages/Login'
+import SignUp from './pages/SignUp'
 
 function App() {
 
@@ -22,6 +24,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/product/:id' element={<ProductInfo />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signUp' element={<SignUp />} />
       </Routes>
       <FooterDescription />
     </div>

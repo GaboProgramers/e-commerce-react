@@ -11,8 +11,6 @@ const CardProduct = ({ product }) => {
         navigate(`/product/${product.id}`)
     }
 
-    console.log(product);
-
     return (
         <article className='card__content' onClick={handleClick}>
             <header className='card__header'>

@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import './style/productDescription.css'
 
 const ProductDescription = ({ product }) => {
-    console.log(product);
-
     const [counter, setCounter] = useState(1)
 
     const handlePlus = () => {
@@ -18,6 +16,11 @@ const ProductDescription = ({ product }) => {
 
     return (
         <div className='content_info-product'>
+            <div className='history'>
+                <a href="#/">Home</a>
+                <div className='separator'></div>
+                <strong>{product?.title}</strong>
+            </div>
             <article className='description__card'>
                 <h2 className='description__title'>{product?.title}</h2>
                 <p className='description__paragraph'>{product?.description}</p>

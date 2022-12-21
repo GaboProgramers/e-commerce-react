@@ -3,6 +3,25 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 60px;
+}
+
+.history {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: .2em;
+    text-align: start;
+    position: relative;
+    left: 30px;
+}
+
+.history .separator {
+    background: #f85555;
+    border-radius: 50%;
+    height: 6px;
+    margin: 0 14px;
+    width: 6px;
 }
 
 .description__card {
