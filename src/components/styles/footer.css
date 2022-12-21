@@ -1,0 +1,32 @@
+.footer__container {
+    width: 100%;
+    padding: 60px 0;
+    background-color: #3c3c3b;
+}
+
+.footer__title {
+    font-size: 1.3rem;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.link {
+    background-color: #50504f;
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 1.9rem;
+    width: 50px;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
