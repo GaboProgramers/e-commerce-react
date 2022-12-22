@@ -15,6 +15,12 @@ const SignUp = () => {
 
     const submit = (data) => {
 
+        const URL = 'https://e-commerce-api.academlo.tech/api/v1/users'
+
+        axios.post(URL, data)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+
         reset({
             email: "",
             password: "",

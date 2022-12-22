@@ -13,6 +13,10 @@ const Navigation = () => {
         navigate('/')
     }
 
+    const handlePurchases = () => {
+        navigate('/purchases')
+    }
+
     return (
         <nav className='nav'>
             <div className="nav__title">
@@ -22,7 +26,7 @@ const Navigation = () => {
                 <li className='item-icon' onClick={handleLogin}>
                     <i className='bx bx-user icon' ></i>
                 </li>
-                <li className='item-icon'>
+                <li className='item-icon' onClick={handlePurchases}>
                     <i className='bx bx-box icon' ></i>
                 </li>
                 <li className='item-icon'>

@@ -104,11 +104,15 @@
     color: #fff;
     background-color: #f85555;
     align-self: center;
-    margin-top: 1em;
 }
 
 .login__content .login__btn:hover {
     background-color: #bd3b3b;
+}
+
+.error-message {
+    color: #2fa8f8;
+    text-align: center;
 }
 
 .sing-up {
