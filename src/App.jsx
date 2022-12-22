@@ -9,6 +9,7 @@ import FooterDescription from './components/FooterDescription'
 import Navigation from './components/Navigation'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
+import { getUserCart } from './store/slices/cart.slice'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getProductsThunk())
+    dispatch(getUserCart())
   }, [])
 
   return (

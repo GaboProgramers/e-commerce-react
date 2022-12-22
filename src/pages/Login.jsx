@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -12,7 +13,14 @@ const Login = () => {
     }
 
     const submit = (data) => {
-        console.log(data);
+        const URL = 'https://e-commerce-api.academlo.tech/api/v1/users/login'
+        axios.post(URL, data)
+            .then(res => {
+                console.log(res)
+                localStorage.setItem('token', res.data.data.token)
+            })
+            .catch(err => console.log(err))
+
         reset({
             email: "",
             password: ""

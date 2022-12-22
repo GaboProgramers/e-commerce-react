@@ -1,14 +1,36 @@
+import axios from 'axios'
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { getUserCart } from '../../store/slices/cart.slice'
+import getConfig from '../../utils/getConfig'
 
 // Styles Css
 import './style/cardProduct.css'
 
 const CardProduct = ({ product }) => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const handleClick = () => {
         navigate(`/product/${product.id}`)
+    }
+
+    const handleBtnClick = (e) => {
+        e.stopPropagation()
+        const URL = 'https://e-commerce-api.academlo.tech/api/v1/cart'
+
+        const data = {
+            id: product.id,
+            quantity: 1
+        }
+
+        axios.post(URL, data, getConfig())
+            .then(res => {
+                console.log(res.data)
+                dispatch(getUserCart())
+            })
+            .catch(err => console.log(err))
     }
 
     return (
@@ -27,7 +49,7 @@ const CardProduct = ({ product }) => {
                     <span className='card__item-price'>Price</span>
                     <h3 className='card__item-valor'>{product.price}</h3>
                 </article>
-                <button className='card__btn'><i className='bx bx-cart-add icon'></i></button>
+                <button className='card__btn' onClick={handleBtnClick}><i className='bx bx-cart-add icon'></i></button>
             </section>
         </article>
     )

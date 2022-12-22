@@ -1,0 +1,17 @@
+/*  // ! Codigo para Crear un Nuevo usuario
+     useEffect(() => {
+         const URL = 'https://e-commerce-api.academlo.tech/api/v1/users'
+ 
+         const data = {
+             firstName: 'gabriel',
+             lastName: 'gutierrez',
+             email: 'gyostin604@gmail.com',
+             password: 'gabriel123',
+             phone: '3117383596',
+             role: 'admin'
+         }
+ 
+         axios.post(URL, data)
+             .then(res => console.log(res.data))
+             .catch(err => console.log(err))
+     }, []) */
