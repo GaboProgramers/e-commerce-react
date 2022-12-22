@@ -21,18 +21,32 @@
     cursor: pointer;
 }
 
+.nav__title:hover {
+    color: #bd3b3b;
+}
+
 .list__items {
     display: flex;
     align-items: center;
     position: relative;
+    height: inherit;
+    width: 30%;
 }
 
 .item-icon {
     color: #ababab;
     font-size: 1.4rem;
     line-height: 0;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
-    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    aspect-ratio: 1;
     cursor: pointer;
+}
+
+.item-icon .icon:hover {
+    color: #bd3b3b;
 }

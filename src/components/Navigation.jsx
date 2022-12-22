@@ -20,13 +20,13 @@ const Navigation = () => {
             </div>
             <ul className='list__items'>
                 <li className='item-icon' onClick={handleLogin}>
-                    <i className='bx bx-user' ></i>
+                    <i className='bx bx-user icon' ></i>
                 </li>
                 <li className='item-icon'>
-                    <i className='bx bx-box' ></i>
+                    <i className='bx bx-box icon' ></i>
                 </li>
                 <li className='item-icon'>
-                    <i className='bx bx-cart' ></i>
+                    <i className='bx bx-cart icon' ></i>
                 </li>
             </ul>
         </nav>
