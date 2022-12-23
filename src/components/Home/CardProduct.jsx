@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getUserCart } from '../../store/slices/cart.slice'
 import getConfig from '../../utils/getConfig'
+import Swal from 'sweetalert2'
 
 // Styles Css
 import './style/cardProduct.css'
@@ -26,32 +27,69 @@ const CardProduct = ({ product }) => {
         }
 
         axios.post(URL, data, getConfig())
-            .then(res => {
-                console.log(res.data)
+            .then(() => {
                 dispatch(getUserCart())
-            })
-            .catch(err => console.log(err))
-    }
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
 
+                Toast.fire({
+                    icon: 'success',
+                    title: 'product added to cart'
+                })
+            })
+            .catch(err => {
+                if (err.response.status === 401) {
+                    navigate('/login')
+                } else {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Im sorry, you have already added this product to the cart'
+                    })
+                }
+            })
+    }
     return (
-        <article className='card__content' onClick={handleClick}>
-            <header className='card__header'>
-                <div className="card__img">
-                    {<img className='over' src={product.productImgs[1]} alt={product.title} />}
-                    <img className='img__primary' src={product.productImgs[0]} alt={product.title} />
-                </div>
-            </header>
-            <section className='card__description'>
-                <h2 className='card__title'>
-                    {product.title}
-                </h2>
-                <article className='card__price'>
-                    <span className='card__item-price'>Price</span>
-                    <h3 className='card__item-valor'>{product.price}</h3>
-                </article>
-                <button className='card__btn' onClick={handleBtnClick}><i className='bx bx-cart-add icon'></i></button>
-            </section>
-        </article>
+        <div className="box__content-card">
+            <article className='card__content' onClick={handleClick}>
+                <header className='card__header'>
+                    <div className="card__img">
+                        <img className='over' src={product.productImgs[1]} alt={product.title} />
+                        <img className='img__primary' src={product.productImgs[0]} alt={product.title} />
+                    </div>
+                </header>
+                <section className='card__description'>
+                    <h2 className='card__title'>
+                        {product.title}
+                    </h2>
+                    <article className='card__price'>
+                        <span className='card__item-price'>Price</span>
+                        <h3 className='card__item-valor'>{product.price}</h3>
+                    </article>
+                    <button className='card__btn' onClick={handleBtnClick}><i className='bx bx-cart-add icon'></i></button>
+                </section>
+            </article>
+        </div>
     )
 }
 

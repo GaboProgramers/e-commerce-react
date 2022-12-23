@@ -39,7 +39,9 @@ function App() {
           <Route path='/user' element={<User />} />
         </Route>
       </Routes>
-      <FooterDescription />
+      <div className="footer">
+        <FooterDescription />
+      </div>
     </div>
   )
 }

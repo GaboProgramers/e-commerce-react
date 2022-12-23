@@ -69,3 +69,20 @@
     gap: 1em;
     margin-bottom: 2em;
 }
+
+@media (min-width: 700px) {
+
+    .main__container-filterBox {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .main-content {
+        width: 80%;
+    }
+
+    .search__box .filter__btn {
+        display: none;
+    }
+}

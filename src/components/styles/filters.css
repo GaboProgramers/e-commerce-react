@@ -1,0 +1,23 @@
+.filter__container {
+    display: none;
+}
+
+.filter__content {
+    width: 25%;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    top: 50px;
+    left: 0;
+    background-color: transparent;
+    overflow: hidden;
+}
+
+@media (min-width: 700px) {
+    .filter__container {
+        display: block;
+    }
+}

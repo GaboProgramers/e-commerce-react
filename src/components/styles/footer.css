@@ -2,6 +2,12 @@
     width: 100%;
     padding: 60px 0;
     background-color: #3c3c3b;
+    z-index: 1000;
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .footer__title {
