@@ -22,7 +22,7 @@ const Filters = () => {
             <div className={`filter__price ${isClose ? '' : 'closed'} `}>
                 <div className="filter__header" onClick={() => setIsClose(!isClose)}>
                     <p className='filter__title'>Price</p>
-                    <i className='bx bx-chevron-down icon'></i>
+                    <i className={`bx ${isClose ? 'bx-chevron-down' : 'bx-chevron-up'} icon`}></i>
                 </div>
                 <form className='form__filter'>
                     <div className='form__filter-from'>
@@ -40,7 +40,6 @@ const Filters = () => {
                 <div className="filter__header" onClick={() => setIsOpen(!isOpen)}>
                     <p className='filter__title'>Category</p>
                     <i className={`bx ${isOpen ? 'bx-chevron-down' : 'bx-chevron-up'} icon`} ></i>
-                    {/* <i class='bx bx-chevron-up'></i> */}
                 </div>
                 <div className="category__list">
                     <ul>

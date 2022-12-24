@@ -9,7 +9,7 @@ import './styles/home.css'
 const Home = () => {
     const products = useSelector(state => state.products)
 
-    const [isOpenFilter, setIsOpenFilter] = useState(true)
+    const [isOpenFilter, setIsOpenFilter] = useState(false)
 
     return (
         <div className='main__container-filterBox'>
