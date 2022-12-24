@@ -18,7 +18,9 @@ const SignUp = () => {
         const URL = 'https://e-commerce-api.academlo.tech/api/v1/users'
 
         axios.post(URL, data)
-            .then(res => console.log(res))
+            .then(() => {
+                navigate(-1)
+            })
             .catch(err => console.log(err))
 
         reset({

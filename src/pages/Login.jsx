@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import './styles/login.css'
 
 const Login = () => {
@@ -17,8 +18,18 @@ const Login = () => {
         const URL = 'https://e-commerce-api.academlo.tech/api/v1/users/login'
         axios.post(URL, data)
             .then(res => {
-                console.log(res)
+                localStorage.setItem("token", res.data.data.token);
+                localStorage.setItem("userName", res.data.data.user.firstName
+                    + " " + res.data.data.user.lastName);
                 localStorage.setItem('token', res.data.data.token)
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Login Complete',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+                navigate('/')
             })
             .catch(() => setError('Invalid Credentials'))
 

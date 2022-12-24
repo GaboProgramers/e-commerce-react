@@ -64,7 +64,7 @@ const CardProduct = ({ product }) => {
 
                     Toast.fire({
                         icon: 'error',
-                        title: 'Im sorry, you have already added this product to the cart'
+                        title: 'You already added this product to the cart'
                     })
                 }
             })

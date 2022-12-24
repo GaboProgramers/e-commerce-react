@@ -15,7 +15,6 @@ import User from './pages/User'
 import ProtecterRoutes from './components/ProtecterRoutes'
 
 function App() {
-
   const dispatch = useDispatch()
 
   useEffect(() => {

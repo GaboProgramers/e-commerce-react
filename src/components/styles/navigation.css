@@ -53,6 +53,10 @@
 
 @media (min-width: 700px) {
 
+    .nav {
+        border-bottom: 1px solid #ccc;
+    }
+
     .nav__title {
         width: 20%;
         text-align: center;

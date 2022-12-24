@@ -109,7 +109,12 @@
     font-size: 1.2rem;
     position: relative;
     left: 12px;
+    user-select: none;
     border: 1px solid #dcd9d9;
+}
+
+.quantity__btn {
+    cursor: pointer;
 }
 
 .description__btn {

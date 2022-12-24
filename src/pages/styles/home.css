@@ -7,6 +7,34 @@
     position: relative;
 }
 
+.search__box .filter-modal.open {
+    transform: translateX(0);
+}
+
+.search__box .filter-modal {
+    background: #fff;
+    bottom: 0;
+    box-shadow: 0 8px 24px hsl(210deg 8% 62% / 20%);
+    padding: 10px 13px 50px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    -webkit-transform-origin: top right;
+    transform-origin: top right;
+    transition: all .7s ease;
+    width: 300px;
+    z-index: 99;
+}
+
+.search__box .filter-modal .close {
+    background: transparent;
+    display: block;
+    font-size: 2rem;
+    margin: 10px 20px 15px auto;
+}
+
 .search__box .form__container {
     display: flex;
     margin-bottom: 10px;
