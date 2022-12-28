@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import CartModal from './CartModal'
 import './styles/navigation.css'
 
 const Navigation = () => {
     const navigate = useNavigate()
+    const [isCartOpen, setIsCartOpen] = useState(false)
 
     const handleLogin = () => {
         navigate('/user')
@@ -15,6 +17,14 @@ const Navigation = () => {
 
     const handlePurchases = () => {
         navigate('/purchases')
+    }
+
+    const openCart = () => {
+        if (localStorage.getItem('token')) {
+            setIsCartOpen(!isCartOpen)
+        } else {
+            navigate('/login')
+        }
     }
 
     return (
@@ -29,10 +39,20 @@ const Navigation = () => {
                 <li className='item-icon' onClick={handlePurchases}>
                     <i className='bx bx-box icon' ></i>
                 </li>
-                <li className='item-icon'>
+                <li className='item-icon'
+                    onClick={openCart}
+                    style={{ color: !isCartOpen ? '#ababab' : '' }}
+                >
                     <i className='bx bx-cart icon' ></i>
                 </li>
             </ul>
+            <div className={`cart__modal ${isCartOpen ? 'open' : ''}`}>
+                <CartModal handleClose={() => setIsCartOpen(false)} />
+            </div>
+            {
+                isCartOpen &&
+                <div className='overlay' onClick={() => setIsCartOpen(false)}></div>
+            }
         </nav>
     )
 }
