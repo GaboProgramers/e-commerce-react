@@ -35,6 +35,14 @@
     margin: 10px 20px 15px auto;
 }
 
+.search__box .filter-modal .filter__btn {
+    background-color: #e75151;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 1em;
+    margin-right: -20px;
+}
+
 .search__box .form__container {
     display: flex;
     margin-bottom: 10px;
@@ -78,10 +86,6 @@
     right: 15%;
     align-self: flex-end;
     gap: .35em;
-}
-
-.search__box .filter__btn:hover {
-    color: #bd3b3b;
 }
 
 .search__box .filter__btn .icon {

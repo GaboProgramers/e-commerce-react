@@ -1,22 +1,15 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
-import getConfig from '../utils/getConfig'
+import { removeFromCartThunk } from '../store/slices/cart.slice'
 import './styles/cartModal.css'
 
 const CartModal = ({ handleClose }) => {
-
-    const [cartProducts, setCartProducts] = useState()
-
-    useEffect(() => {
-        const URL = 'https://e-commerce-api.academlo.tech/api/v1/cart'
-        axios.get(URL, getConfig())
-            .then(res => setCartProducts(res.data.data.cart.products))
-            .catch(err => console.log(err))
-    }, [])
+    const dispatch = useDispatch()
+    const cartProducts = useSelector(state => state.cart)
 
     const checkout = () => {
-        Navigate('/purchase')
+        Navigate('/purchases')
         handleClose()
     }
 
@@ -59,7 +52,7 @@ const CartModal = ({ handleClose }) => {
                                         </div>
                                     </div>
                                     <div className='product__delete'>
-                                        <button className='delete__btn'>
+                                        <button className='delete__btn' onClick={() => dispatch(removeFromCartThunk(product.id))}>
                                             <i className='bx bx-trash' style={{ color: '#f85555' }}  ></i>
                                         </button>
                                     </div>

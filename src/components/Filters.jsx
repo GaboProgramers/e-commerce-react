@@ -6,8 +6,8 @@ import './styles/filters.css'
 const Filters = () => {
 
     const [categoriesFilter, setCategoriesFilter] = useState()
-    const [isClose, setIsClose] = useState(true)
-    const [isOpen, setIsOpen] = useState(true)
+    const [isClose, setIsClose] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
 
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const Filters = () => {
             <div className={`filter__price ${isClose ? '' : 'closed'} `}>
                 <div className="filter__header" onClick={() => setIsClose(!isClose)}>
                     <p className='filter__title'>Price</p>
-                    <i className={`bx ${isClose ? 'bx-chevron-down' : 'bx-chevron-up'} icon`}></i>
+                    <i className={`bx ${isClose ? 'bx-chevron-up' : 'bx-chevron-down'} icon`}></i>
                 </div>
                 <form className='form__filter'>
                     <div className='form__filter-from'>
@@ -39,7 +39,7 @@ const Filters = () => {
             <div className={`filter__category ${isOpen ? '' : 'closed'} `}>
                 <div className="filter__header" onClick={() => setIsOpen(!isOpen)}>
                     <p className='filter__title'>Category</p>
-                    <i className={`bx ${isOpen ? 'bx-chevron-down' : 'bx-chevron-up'} icon`} ></i>
+                    <i className={`bx ${isOpen ? 'bx-chevron-up' : 'bx-chevron-down'} icon`} ></i>
                 </div>
                 <div className="category__list">
                     <ul>
