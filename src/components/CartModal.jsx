@@ -1,15 +1,18 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, Navigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { removeFromCartThunk } from '../store/slices/cart.slice'
+import { getPurchasesCartThunk } from '../store/slices/Purchases.slice'
 import './styles/cartModal.css'
 
 const CartModal = ({ handleClose }) => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const cartProducts = useSelector(state => state.cart)
 
     const checkout = () => {
-        Navigate('/purchases')
+        dispatch(getPurchasesCartThunk())
+        navigate("/purchases")
         handleClose()
     }
 
@@ -59,7 +62,7 @@ const CartModal = ({ handleClose }) => {
                                 </div>
                                 <div className='total'>
                                     <span className='label'>Total :</span>
-                                    <b>$ {product.price * product.productsInCart?.quantity}</b>
+                                    <strong>$ {product.price * product.productsInCart?.quantity}</strong>
                                 </div>
                             </li>
                         ))

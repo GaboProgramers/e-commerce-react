@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import CurrentPage from '../CurrentPage'
 import './style/productDescription.css'
 
 const ProductDescription = ({ product }) => {
@@ -16,11 +17,12 @@ const ProductDescription = ({ product }) => {
 
     return (
         <div className='content_info-product'>
-            <div className='history'>
+            {/* <div className='history'>
                 <a href="#/">Home</a>
                 <div className='separator'></div>
                 <strong>{product?.title}</strong>
-            </div>
+            </div> */}
+            <CurrentPage currentPage={product?.title} />
             <article className='description__card'>
                 <h2 className='description__title'>{product?.title}</h2>
                 <p className='description__paragraph'>{product?.description}</p>
