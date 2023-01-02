@@ -24,21 +24,25 @@ const Purchases = () => {
             .catch(err => console.log(err))
     }, [])
 
+    console.log(purchases);
+
     return (
         <section className='purchases__content'>
             <CurrentPage currentPage='purchases' />
             <h1 className='purchases__title'>Purchases</h1>
-            {
-                purchases ? (
-                    purchases.map(purchase => (
-                        <PurchasesItems key={purchase.id} purchase={purchase} />
-                    ))
-                ) : (
-                    <p className='message'>
-                        You haven't bought anything yet. <Link to='/'>See Products</Link>
-                    </p>
-                )
-            }
+            <div className='purchases-logic'>
+                {
+                    purchases ? (
+                        purchases.map(purchase => (
+                            <PurchasesItems key={purchase.id} purchase={purchase} />
+                        ))
+                    ) : (
+                        <p className='message'>
+                            You haven't bought anything yet. <Link to='/'>See Products</Link>
+                        </p>
+                    )
+                }
+            </div>
         </section>
     )
 }

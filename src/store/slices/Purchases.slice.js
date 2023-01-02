@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import getConfig from "../../utils/getConfig";
-import { setCartGlobal } from "./cart.slice";
 
 const purchasesSlice = createSlice({
     name: 'purchases',
@@ -19,7 +18,7 @@ export const getPurchasesCartThunk = () => (dispatch) => {
     const URL = 'https://e-commerce-api.academlo.tech/api/v1/purchases'
     return axios.post(URL, {}, getConfig())
         .then(() => {
-            dispatch(getPurchasesThunk())
+            dispatch(getPurchasesCartThunk())
         })
         .catch(err => console.log(err))
 }

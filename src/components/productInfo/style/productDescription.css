@@ -14,7 +14,8 @@
     text-align: start;
     position: relative;
     left: 30px;
-    margin-top: 5em;
+    margin-top: 4em;
+    margin-bottom: 1em;
 }
 
 .history .separator {

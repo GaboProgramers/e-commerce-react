@@ -22,7 +22,7 @@
     right: -100%;
     top: 50px;
     transition: right .4s ease;
-    width: 30%;
+    width: 65%;
     z-index: 9;
     overflow: auto;
 }
@@ -122,4 +122,10 @@
 
 .cart__item .total {
     text-align: end;
+}
+
+@media (min-width: 700px) {
+    .cart__modal {
+        width: 25%;
+    }
 }

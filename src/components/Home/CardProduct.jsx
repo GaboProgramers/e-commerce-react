@@ -9,7 +9,7 @@ import Swal from 'sweetalert2'
 // Styles Css
 import './style/cardProduct.css'
 
-const CardProduct = ({ product }) => {
+const CardProduct = ({ product, setIsCartOpen }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -33,7 +33,7 @@ const CardProduct = ({ product }) => {
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
-                    timer: 3000,
+                    timer: 1000,
                     timerProgressBar: true,
                     didOpen: (toast) => {
                         toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -45,6 +45,7 @@ const CardProduct = ({ product }) => {
                     icon: 'success',
                     title: 'product added to cart'
                 })
+                setIsCartOpen(true)
             })
             .catch(err => {
                 if (err.response.status === 401) {
@@ -69,6 +70,7 @@ const CardProduct = ({ product }) => {
                 }
             })
     }
+
     return (
         <div className="box__content-card">
             <article className='card__content' onClick={handleClick}>

@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import CartModal from './CartModal'
 import './styles/navigation.css'
 
-const Navigation = () => {
+const Navigation = ({ isCartOpen, setIsCartOpen }) => {
     const navigate = useNavigate()
-    const [isCartOpen, setIsCartOpen] = useState(false)
 
     const handleLogin = () => {
         navigate('/user')

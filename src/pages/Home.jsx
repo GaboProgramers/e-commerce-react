@@ -7,7 +7,7 @@ import CardProduct from '../components/Home/CardProduct';
 // Style Css
 import './styles/home.css'
 
-const Home = () => {
+const Home = ({ isCartOpen, setIsCartOpen }) => {
     const products = useSelector(state => state.products)
 
     const [isOpenFilter, setIsOpenFilter] = useState(false)
@@ -69,6 +69,8 @@ const Home = () => {
                             <CardProduct
                                 key={product.id}
                                 product={product}
+                                isCartOpen={isCartOpen}
+                                setIsCartOpen={setIsCartOpen}
                             />
                         ))
                     }

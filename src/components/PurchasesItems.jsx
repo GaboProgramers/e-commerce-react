@@ -4,6 +4,7 @@ import '../pages/styles/purchases.css'
 
 const PurchasesItems = ({ purchase }) => {
 
+
     const navigate = useNavigate()
 
     const options = {
@@ -15,26 +16,26 @@ const PurchasesItems = ({ purchase }) => {
     const date = new Date(purchase.createdAt).toLocaleDateString('en-us', options)
 
     return (
-        <div>
-            <div>
-                <strong>{date}</strong>
+        <div className='purchases__items'>
+            <div className='purchases__header'>
+                <header> <strong>{date}</strong> </header>
             </div>
 
-            <ul>
+            <ul className='purchases__products-list'>
                 {
                     purchase.cart.products.map(productItem => (
-                        <li key={productItem.id}
+                        <li className='purchases__products-items' key={productItem.id}
                             onClick={() => navigate(`/product/${productItem.id}`)}
                         >
-                            <div>
+                            <div className='purchases__name'>
                                 {productItem.title}
                             </div>
-                            <div>
-                                <div>
+                            <div className='purchases__quantity'>
+                                <div className='purchases__box'>
                                     {productItem.productsInCart.quantity}
                                 </div>
                             </div>
-                            <div>
+                            <div className='purchases__price'>
                                 $ {productItem.price}
                             </div>
                         </li>

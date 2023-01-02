@@ -1,7 +1,7 @@
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { getProductsThunk } from './store/slices/products.slice'
 import { getUserCart } from './store/slices/cart.slice'
 import Home from './pages/Home'
@@ -16,6 +16,8 @@ import ProtecterRoutes from './components/ProtecterRoutes'
 
 function App() {
   const dispatch = useDispatch()
+  const [isCartOpen, setIsCartOpen] = useState(false)
+
 
   useEffect(() => {
     dispatch(getProductsThunk())
@@ -24,10 +26,10 @@ function App() {
 
   return (
     <div className="App">
-      <Navigation />
+      <Navigation isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
       <Routes>
         {/* Rutas Publicas */}
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />} />
         <Route path='/product/:id' element={<ProductInfo />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signUp' element={<SignUp />} />
