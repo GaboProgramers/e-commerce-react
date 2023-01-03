@@ -43,7 +43,7 @@ const CardProduct = ({ product, setIsCartOpen }) => {
 
                 Toast.fire({
                     icon: 'success',
-                    title: 'product added to cart'
+                    title: 'product add to cart'
                 })
                 setIsCartOpen(true)
             })
@@ -69,6 +69,7 @@ const CardProduct = ({ product, setIsCartOpen }) => {
                     })
                 }
             })
+        setIsCartOpen(true)
     }
 
     return (

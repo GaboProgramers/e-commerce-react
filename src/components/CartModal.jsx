@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { removeFromCartThunk } from '../store/slices/cart.slice'
+import { getUserCart, removeFromCartThunk } from '../store/slices/cart.slice'
 import { getPurchasesCartThunk } from '../store/slices/Purchases.slice'
 import './styles/cartModal.css'
 
@@ -12,6 +12,7 @@ const CartModal = ({ handleClose }) => {
 
     const checkout = () => {
         dispatch(getPurchasesCartThunk())
+        dispatch(getUserCart())
         navigate("/purchases")
         handleClose()
     }
@@ -20,11 +21,11 @@ const CartModal = ({ handleClose }) => {
 
     if (cartProducts?.length > 0) {
         if (cartProducts?.length > 1) {
-            total = cartProducts?.reduce((initial, current) => {
-                if (typeof initial === 'number') {
-                    return initial + (current.price * current.productsInCart?.quantity)
+            total = cartProducts?.reduce((acc, cv) => {
+                if (typeof acc === 'number') {
+                    return acc + (cv.price * cv.productsInCart?.quantity)
                 } else {
-                    return (initial.price * initial.productsInCart?.quantity) + (current.price * current.productsInCart?.quantity)
+                    return (acc.price * acc.productsInCart?.quantity) + (cv.price * cv.productsInCart?.quantity)
                 }
             });
         } else {

@@ -44,6 +44,8 @@ export const removeFromCartThunk = productId => {
                     title: 'Removed Product'
                 })
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                dispatch(setCartGlobal([]))
+            })
     }
 }

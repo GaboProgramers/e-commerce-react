@@ -18,7 +18,7 @@
 }
 
 .filter__price {
-    width: 85%;
+    width: 95%;
     margin-left: 20px;
     margin-top: 3em;
     margin-bottom: 10px;
@@ -100,7 +100,7 @@
 }
 
 .filter__category {
-    width: 85%;
+    width: 95%;
     margin-left: 20px;
     margin-bottom: 10px;
     max-height: 300px;

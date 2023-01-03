@@ -24,8 +24,6 @@ const Purchases = () => {
             .catch(err => console.log(err))
     }, [])
 
-    console.log(purchases);
-
     return (
         <section className='purchases__content'>
             <CurrentPage currentPage='purchases' />
