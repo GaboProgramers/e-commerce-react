@@ -1,30 +1,66 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import getConfig from '../utils/getConfig'
+// import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+import { getProductByCategory, getProductsThunk } from '../store/slices/products.slice'
+// import getConfig from '../utils/getConfig'
 import './styles/filters.css'
 
-const Filters = () => {
+const Filters = ({ setFilterPrice }) => {
 
-    const [categoriesFilter, setCategoriesFilter] = useState()
+    const [categoriesFilter, setCategoriesFilter] = useState([])
+    const dispatch = useDispatch()
+    // const { register, handleSubmit, reset } = useForm()
+    // apertura y cierre de los filtros
     const [isClose, setIsClose] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
 
 
     useEffect(() => {
         const URL = 'https://e-commerce-api.academlo.tech/api/v1/products/categories'
-        axios.get(URL, getConfig())
+        axios.get(URL)
             .then(res => setCategoriesFilter(res.data.data.categories))
             .catch(err => console.log(err))
     }, [])
 
+    const handleClick = (id) => {
+        dispatch(getProductByCategory(id))
+    }
+
+    const handleAllProducts = () => {
+        dispatch(getProductsThunk())
+    }
+
+    const handleSubmitPrice = (e) => {
+        e.preventDefault()
+        const inputFrom = +e.target.from.value
+        const inputTo = +e.target.to.value
+        if (inputFrom && inputTo) {
+            setFilterPrice({
+                from: inputFrom,
+                to: inputTo
+            })
+        } else if (!inputFrom && inputTo) {
+            setFilterPrice({
+                from: 0,
+                to: inputTo
+            })
+        } else if (inputFrom && !inputTo) {
+            setFilterPrice({
+                from: inputFrom,
+                to: Infinity
+            })
+        }
+    }
+
     return (
-        <div className='filter__content'>
-            <div className={`filter__price ${isClose ? '' : 'closed'} `}>
-                <div className="filter__header" onClick={() => setIsClose(!isClose)}>
+        <section className='filter__content'>
+            <aside className={`filter__price ${isClose ? '' : 'closed'} `}>
+                <article className="filter__header" onClick={() => setIsClose(!isClose)}>
                     <p className='filter__title'>Price</p>
                     <i className={`bx ${isClose ? 'bx-chevron-up' : 'bx-chevron-down'} icon`}></i>
-                </div>
-                <form className='form__filter'>
+                </article>
+                <form className='form__filter' onSubmit={handleSubmitPrice}>
                     <div className='form__filter-from'>
                         <label className='form__filter-label' htmlFor="from">From</label>
                         <input className='form__filter-input' type="number" id='from' />
@@ -33,27 +69,28 @@ const Filters = () => {
                         <label className='form__filter-label' htmlFor="to">To</label>
                         <input className='form__filter-input' type="number" id='to' />
                     </div>
-                    <button className='filter__btn'>Filter price</button>
+                    <button className='filter__btn'>Apply</button>
                 </form>
-            </div>
-            <div className={`filter__category ${isOpen ? '' : 'closed'} `}>
-                <div className="filter__header" onClick={() => setIsOpen(!isOpen)}>
+            </aside>
+            <aside className={`filter__category ${isOpen ? '' : 'closed'} `}>
+                <article className="filter__header" onClick={() => setIsOpen(!isOpen)}>
                     <p className='filter__title'>Category</p>
                     <i className={`bx ${isOpen ? 'bx-chevron-up' : 'bx-chevron-down'} icon`} ></i>
-                </div>
+                </article>
                 <div className="category__list">
                     <ul>
+                        <li><button className='list__items' onClick={handleAllProducts}>All Products</button></li>
                         {
                             categoriesFilter?.map(sCategory => (
                                 <li key={sCategory.id}>
-                                    <button className='list__items'>{sCategory.name}</button>
+                                    <button onClick={() => handleClick(sCategory.id)} className='list__items'>{sCategory.name}</button>
                                 </li>
                             ))
                         }
                     </ul>
                 </div>
-            </div>
-        </div>
+            </aside>
+        </section>
     )
 }
 

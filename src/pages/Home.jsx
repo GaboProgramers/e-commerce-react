@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Filters from '../components/Filters';
@@ -11,44 +10,40 @@ const Home = ({ isCartOpen, setIsCartOpen }) => {
     const products = useSelector(state => state.products)
 
     const [isOpenFilter, setIsOpenFilter] = useState(false)
-
-    const [search, setSearch] = useState('')
-
-    const [filterName, setFilterName] = useState()
-
-    // const dispatch = useDispatch()
-
-    const getProductFilterName = name => {
-        const URL = `https://e-commerce-api.academlo.tech/api/v1/products?query=${name}`
-        axios.get(URL)
-            .then(res => setFilterName(res.data.data.products))
-            .catch(err => console.log(err))
-    }
+    const [productsFilter, setProductsFilter] = useState()
+    const [filterPrice, setFilterPrice] = useState({
+        from: 0,
+        to: Infinity
+    })
 
     useEffect(() => {
-        getProductFilterName(filterName)
-    }, [])
+        if (products) {
+            setProductsFilter(products)
+        }
+    }, [products])
 
-
-    const handleSearch = (e) => {
-        e.preventDefault()
-        getProductFilterName(search)
+    const handdleChange = (e) => {
+        const inputValue = e.target.value.toLowerCase().trim()
+        const filter = products?.filter(prod => prod.title.toLowerCase().includes(inputValue))
+        setProductsFilter(filter)
     }
+
+    const filterCallBack = priceP => +priceP.price >= filterPrice.from && +priceP.price <= filterPrice.to
 
     return (
         <div className='main__container-filterBox'>
             <div className='filter__container'>
                 <Filters
+                    setFilterPrice={setFilterPrice}
                 />
             </div>
             <div className="main-content">
                 <div className="search__box">
-                    <form className='form__container' onSubmit={handleSearch}>
+                    <form className='form__container'>
                         <input className='form__input'
                             id='search' type="text"
-                            value={search}
                             placeholder='What are you looking for?'
-                            onChange={e => setSearch(e.target.value)}
+                            onChange={handdleChange}
                         />
                         <button className='form__btn'><i className='bx bx-search' ></i></button>
                     </form>
@@ -65,7 +60,7 @@ const Home = ({ isCartOpen, setIsCartOpen }) => {
                 </div>
                 <div className="products__container">
                     {
-                        products?.map(product => (
+                        productsFilter?.filter(filterCallBack).map(product => (
                             <CardProduct
                                 key={product.id}
                                 product={product}
