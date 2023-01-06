@@ -46,7 +46,7 @@ const Navigation = ({ isCartOpen, setIsCartOpen }) => {
                 </li>
             </ul>
             <div className={`cart__modal ${isCartOpen ? 'open' : ''}`}>
-                <CartModal handleClose={() => setIsCartOpen(false)} />
+                <CartModal isCartOpen={isCartOpen} handleClose={() => setIsCartOpen(false)} />
             </div>
             {
                 isCartOpen &&

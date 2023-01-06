@@ -5,11 +5,18 @@ const productsSlice = createSlice({
     name: 'products',
     initialState: null,
     reducers: {
-        setProductsGlobal: (state, action) => action.payload
+        setProductsGlobal: (state, action) => action.payload,
+        ascendingOrderProducts: state => {
+            state.sort((a, b) => +a.price - +b.price)
+        },
+        descendingOrderPRoducts: state => {
+            state.sort((a, b) => +b.price - +a.price)
+        }
     }
 })
+// ,descendingOrderPRoducts:
 
-export const { setProductsGlobal } = productsSlice.actions
+export const { setProductsGlobal, ascendingOrderProducts, descendingOrderPRoducts } = productsSlice.actions
 
 export default productsSlice.reducer
 

@@ -3,14 +3,15 @@ import React, { useEffect, useState } from 'react'
 // import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { getProductByCategory, getProductsThunk } from '../store/slices/products.slice'
+import ToOrderProducts from './Home/ToOrderProducts'
 // import getConfig from '../utils/getConfig'
 import './styles/filters.css'
 
-const Filters = ({ setFilterPrice }) => {
+const Filters = ({ setInputPrice, setInputValue }) => {
 
     const [categoriesFilter, setCategoriesFilter] = useState([])
     const dispatch = useDispatch()
-    // const { register, handleSubmit, reset } = useForm()
+    // const { reset } = useForm()
     // apertura y cierre de los filtros
     const [isClose, setIsClose] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
@@ -25,31 +26,38 @@ const Filters = ({ setFilterPrice }) => {
 
     const handleClick = (id) => {
         dispatch(getProductByCategory(id))
+        setInputValue('')
     }
 
     const handleAllProducts = () => {
         dispatch(getProductsThunk())
+        setInputValue('')
     }
 
     const handleSubmitPrice = (e) => {
-        e.preventDefault()
-        const inputFrom = +e.target.from.value
-        const inputTo = +e.target.to.value
+        e.preventDefault();
+        const inputFrom = +e.target.from.value;
+        const inputTo = +e.target.to.value;
         if (inputFrom && inputTo) {
-            setFilterPrice({
+            setInputPrice({
                 from: inputFrom,
-                to: inputTo
-            })
+                to: inputTo,
+            });
         } else if (!inputFrom && inputTo) {
-            setFilterPrice({
+            setInputPrice({
                 from: 0,
-                to: inputTo
-            })
+                to: inputTo,
+            });
         } else if (inputFrom && !inputTo) {
-            setFilterPrice({
+            setInputPrice({
                 from: inputFrom,
-                to: Infinity
-            })
+                to: Infinity,
+            });
+        } else {
+            setInputPrice({
+                from: 0,
+                to: Infinity,
+            });
         }
     }
 
@@ -89,6 +97,9 @@ const Filters = ({ setFilterPrice }) => {
                         }
                     </ul>
                 </div>
+            </aside>
+            <aside>
+                <ToOrderProducts />
             </aside>
         </section>
     )

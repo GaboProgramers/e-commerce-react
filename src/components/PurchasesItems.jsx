@@ -27,16 +27,16 @@ const PurchasesItems = ({ purchase }) => {
                         <li className='purchases__products-items' key={productItem.id}
                             onClick={() => navigate(`/product/${productItem.id}`)}
                         >
-                            <div className='purchases__name'>
+                            <h4 className='purchases__name'>
                                 {productItem.title}
-                            </div>
-                            <div className='purchases__quantity'>
+                            </h4>
+                            <span className='purchases__quantity'>
                                 <div className='purchases__box'>
                                     {productItem.productsInCart.quantity}
                                 </div>
-                            </div>
+                            </span>
                             <div className='purchases__price'>
-                                $ {productItem.price}
+                                $ {productItem.price * productItem.productsInCart.quantity}
                             </div>
                         </li>
                     ))

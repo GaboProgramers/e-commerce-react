@@ -5,7 +5,7 @@
 .purchases__title {
     position: relative;
     font-size: 1.8rem;
-    left: 30px;
+    left: 50px;
 }
 
 .purchases-logic {
@@ -80,7 +80,7 @@
 @media (min-width: 700px) {
     .purchases-logic {
         width: 100%;
-        max-width: 800px;
+        max-width: 900px;
         display: flex;
         flex-direction: column;
         justify-content: center;

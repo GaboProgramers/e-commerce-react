@@ -102,6 +102,17 @@
     margin-bottom: 2em;
 }
 
+.noProduct__price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    min-height: 60vh;
+    border: 1px solid red;
+}
+
 @media (min-width: 700px) {
 
     .main__container-filterBox {

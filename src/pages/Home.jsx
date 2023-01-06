@@ -11,10 +11,11 @@ const Home = ({ isCartOpen, setIsCartOpen }) => {
 
     const [isOpenFilter, setIsOpenFilter] = useState(false)
     const [productsFilter, setProductsFilter] = useState()
-    const [filterPrice, setFilterPrice] = useState({
+    const [filterPrice, setInputPrice] = useState({
         from: 0,
         to: Infinity
     })
+    const [inputValue, setInputValue] = useState('')
 
     useEffect(() => {
         if (products) {
@@ -26,6 +27,7 @@ const Home = ({ isCartOpen, setIsCartOpen }) => {
         const inputValue = e.target.value.toLowerCase().trim()
         const filter = products?.filter(prod => prod.title.toLowerCase().includes(inputValue))
         setProductsFilter(filter)
+        setInputValue(e.target.value)
     }
 
     const filterCallBack = priceP => +priceP.price >= filterPrice.from && +priceP.price <= filterPrice.to
@@ -34,7 +36,8 @@ const Home = ({ isCartOpen, setIsCartOpen }) => {
         <div className='main__container-filterBox'>
             <div className='filter__container'>
                 <Filters
-                    setFilterPrice={setFilterPrice}
+                    setInputValue={setInputValue}
+                    setInputPrice={setInputPrice}
                 />
             </div>
             <div className="main-content">
@@ -43,6 +46,7 @@ const Home = ({ isCartOpen, setIsCartOpen }) => {
                         <input className='form__input'
                             id='search' type="text"
                             placeholder='What are you looking for?'
+                            value={inputValue}
                             onChange={handdleChange}
                         />
                         <button className='form__btn'><i className='bx bx-search' ></i></button>
@@ -55,19 +59,24 @@ const Home = ({ isCartOpen, setIsCartOpen }) => {
                     <div className={`filter-modal ${isOpenFilter ? 'open' : ''}`}>
                         <button className='close' onClick={() => setIsOpenFilter(false)}><i className='bx bx-x' ></i></button>
                         <h5>Filters</h5>
-                        <Filters handleClose={() => setIsOpenFilter(!isOpenFilter)} />
+                        <Filters
+                            setInputValue={setInputValue}
+                            setInputPrice={setInputPrice}
+                            handleClose={() => setIsOpenFilter(!isOpenFilter)} />
                     </div>
                 </div>
                 <div className="products__container">
                     {
-                        productsFilter?.filter(filterCallBack).map(product => (
-                            <CardProduct
-                                key={product.id}
-                                product={product}
-                                isCartOpen={isCartOpen}
-                                setIsCartOpen={setIsCartOpen}
-                            />
-                        ))
+                        productsFilter?.filter(filterCallBack).length !== 0 ?
+                            productsFilter?.filter(filterCallBack).map(product => (
+                                <CardProduct
+                                    key={product.id}
+                                    product={product}
+                                    isCartOpen={isCartOpen}
+                                    setIsCartOpen={setIsCartOpen}
+                                />
+                            ))
+                            : <h5 className='noProduct__price'>no hay productos en este precio</h5>
                     }
                 </div>
             </div>

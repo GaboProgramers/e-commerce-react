@@ -1,10 +1,25 @@
+// axios
 import axios from 'axios'
+
+// react - state - efect
 import React, { useState } from 'react'
+
+// react-redux
 import { useDispatch } from 'react-redux'
+
+// sweetalert2
 import Swal from 'sweetalert2'
-import { getUserCart } from '../../store/slices/cart.slice'
+
+// configuracion token
 import getConfig from '../../utils/getConfig'
+
+// slices
+import { getUserCart } from '../../store/slices/cart.slice'
+
+// import pages
 import CurrentPage from '../CurrentPage'
+
+//css
 import './style/productDescription.css'
 
 const ProductDescription = ({ product }) => {
@@ -20,6 +35,8 @@ const ProductDescription = ({ product }) => {
             setCounter(counter - 1)
         }
     }
+
+    console.log(product);
 
     const handleCardAdd = () => {
         const URL = 'https://e-commerce-api.academlo.tech/api/v1/cart'

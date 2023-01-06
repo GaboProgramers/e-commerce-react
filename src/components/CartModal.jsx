@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { getUserCart, removeFromCartThunk } from '../store/slices/cart.slice'
 import { getPurchasesCartThunk } from '../store/slices/Purchases.slice'
 import './styles/cartModal.css'
 
-const CartModal = ({ handleClose }) => {
+const CartModal = ({ handleClose, isCartOpen }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const cartProducts = useSelector(state => state.cart)
@@ -16,6 +16,13 @@ const CartModal = ({ handleClose }) => {
         navigate("/purchases")
         handleClose()
     }
+
+    useEffect(() => {
+        if (isCartOpen) {
+            dispatch(getUserCart())
+        }
+    }, [isCartOpen])
+
 
     let total = 0;
 

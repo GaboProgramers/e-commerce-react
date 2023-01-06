@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getUserCart } from '../../store/slices/cart.slice'
 import getConfig from '../../utils/getConfig'
@@ -12,9 +12,29 @@ import './style/cardProduct.css'
 const CardProduct = ({ product, setIsCartOpen }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const cart = useSelector(state => state.cart)
 
     const handleClick = () => {
         navigate(`/product/${product.id}`)
+    }
+
+    const updateQuantity = () => {
+        const productQuantity = cart?.filter(quantity => {
+            if (quantity.id === product.id) {
+                return quantity
+            }
+        })
+
+        const value = productQuantity[0].productsInCart.quantity + 1
+
+        const data = {
+            id: product.id,
+            newQuantity: value
+        }
+        const URL = 'https://e-commerce-api.academlo.tech/api/v1/cart'
+        axios.patch(URL, data, getConfig())
+            .then(() => dispatch(getUserCart()))
+            .catch(err => console.log(err))
     }
 
     const handleBtnClick = (e) => {
@@ -48,14 +68,16 @@ const CardProduct = ({ product, setIsCartOpen }) => {
                 setIsCartOpen(true)
             })
             .catch(err => {
+                console.log(err);
                 if (err.response.status === 401) {
                     navigate('/login')
                 } else {
+                    updateQuantity()
                     const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',
                         showConfirmButton: false,
-                        timer: 3000,
+                        timer: 1000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
                             toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -64,12 +86,12 @@ const CardProduct = ({ product, setIsCartOpen }) => {
                     })
 
                     Toast.fire({
-                        icon: 'error',
-                        title: 'You already added this product to the cart'
+                        icon: 'success',
+                        title: 'Quantity Update'
                     })
                 }
             })
-        setIsCartOpen(true)
+        setIsCartOpen(false)
     }
 
     return (

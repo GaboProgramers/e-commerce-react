@@ -21,7 +21,6 @@ function App() {
 
   useEffect(() => {
     dispatch(getProductsThunk())
-    dispatch(getUserCart())
   }, [])
 
   return (
