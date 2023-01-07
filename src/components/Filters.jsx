@@ -7,7 +7,7 @@ import ToOrderProducts from './Home/ToOrderProducts'
 // import getConfig from '../utils/getConfig'
 import './styles/filters.css'
 
-const Filters = ({ setInputPrice, setInputValue }) => {
+const Filters = ({ setInputPrice, setInputValue, handleClose }) => {
 
     const [categoriesFilter, setCategoriesFilter] = useState([])
     const dispatch = useDispatch()
@@ -27,17 +27,19 @@ const Filters = ({ setInputPrice, setInputValue }) => {
     const handleClick = (id) => {
         dispatch(getProductByCategory(id))
         setInputValue('')
+        handleClose()
     }
 
     const handleAllProducts = () => {
         dispatch(getProductsThunk())
         setInputValue('')
+        handleClose()
     }
 
     const handleSubmitPrice = (e) => {
         e.preventDefault();
-        const inputFrom = +e.target.from.value;
-        const inputTo = +e.target.to.value;
+        let inputFrom = +e.target.from.value;
+        let inputTo = +e.target.to.value;
         if (inputFrom && inputTo) {
             setInputPrice({
                 from: inputFrom,
@@ -59,6 +61,7 @@ const Filters = ({ setInputPrice, setInputValue }) => {
                 to: Infinity,
             });
         }
+        handleClose()
     }
 
     return (
@@ -99,7 +102,7 @@ const Filters = ({ setInputPrice, setInputValue }) => {
                 </div>
             </aside>
             <aside>
-                <ToOrderProducts />
+                <ToOrderProducts handleClose={handleClose} />
             </aside>
         </section>
     )

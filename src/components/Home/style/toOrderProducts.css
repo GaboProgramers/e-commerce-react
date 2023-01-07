@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     gap: 1em;
     padding: .5em;
     position: relative;
@@ -26,8 +27,6 @@
 .order__btn:hover {
     background-color: #f85555;
     color: rgb(0, 0, 0);
-    font-weight: 600;
-    border: none;
 }
 
 @media (min-width: 700px) {

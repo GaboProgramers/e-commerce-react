@@ -1,7 +1,9 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import CurrentPage from '../components/CurrentPage'
 import PurchasesItems from '../components/PurchasesItems'
+import { setLoadingGlobal } from '../store/slices/loading.slice'
 import getConfig from '../utils/getConfig'
 
 import './styles/purchases.css'
@@ -9,8 +11,10 @@ import './styles/purchases.css'
 const Purchases = () => {
 
     const [purchases, setPurchases] = useState([])
+    const dispatch = useDispatch()
 
     useEffect(() => {
+        dispatch(setLoadingGlobal(true))
         const URL = 'https://e-commerce-api.academlo.tech/api/v1/purchases'
         axios.get(URL, getConfig())
             .then(res => {
@@ -22,6 +26,7 @@ const Purchases = () => {
                 setPurchases(purchases)
             })
             .catch(err => console.log(err))
+            .finally(() => dispatch(setLoadingGlobal(false)))
     }, [])
 
     return (

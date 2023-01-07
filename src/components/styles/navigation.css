@@ -60,7 +60,7 @@
     .nav__title {
         width: 20%;
         text-align: center;
-        font-size: 2.5rem;
+        font-size: 1.5rem;
     }
 
     .list__items {
@@ -75,6 +75,17 @@
         aspect-ratio: 0;
         border: 1px solid #ccc;
         cursor: pointer;
+    }
+
+    .item-icon .icon {
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 1000px) {
+
+    .nav__title {
+        font-size: 2rem;
     }
 
     .item-icon .icon {

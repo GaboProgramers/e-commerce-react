@@ -38,6 +38,7 @@ const Home = ({ isCartOpen, setIsCartOpen }) => {
                 <Filters
                     setInputValue={setInputValue}
                     setInputPrice={setInputPrice}
+                    setIsOpenFilter={setIsOpenFilter}
                 />
             </div>
             <div className="main-content">
@@ -76,7 +77,14 @@ const Home = ({ isCartOpen, setIsCartOpen }) => {
                                     setIsCartOpen={setIsCartOpen}
                                 />
                             ))
-                            : <h5 className='noProduct__price'>no hay productos en este precio</h5>
+                            : <div className='noProduct__price'>
+                                <h4>
+                                    There are no products for this filter.
+                                </h4>
+                                <div className='noProduct-img'>
+                                    <img src="./empty-cart.png" alt="empty" />
+                                </div>
+                            </div>
                     }
                 </div>
             </div>

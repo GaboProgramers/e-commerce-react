@@ -8,6 +8,7 @@ import Swal from 'sweetalert2'
 
 // Styles Css
 import './style/cardProduct.css'
+import { setLoadingGlobal } from '../../store/slices/loading.slice'
 
 const CardProduct = ({ product, setIsCartOpen }) => {
     const navigate = useNavigate()
@@ -32,9 +33,11 @@ const CardProduct = ({ product, setIsCartOpen }) => {
             newQuantity: value
         }
         const URL = 'https://e-commerce-api.academlo.tech/api/v1/cart'
+        dispatch(setLoadingGlobal(true))
         axios.patch(URL, data, getConfig())
             .then(() => dispatch(getUserCart()))
             .catch(err => console.log(err))
+            .finally(() => dispatch(setLoadingGlobal(false)))
     }
 
     const handleBtnClick = (e) => {
@@ -45,7 +48,7 @@ const CardProduct = ({ product, setIsCartOpen }) => {
             id: product.id,
             quantity: 1
         }
-
+        dispatch(setLoadingGlobal(true))
         axios.post(URL, data, getConfig())
             .then(() => {
                 dispatch(getUserCart())
@@ -68,7 +71,6 @@ const CardProduct = ({ product, setIsCartOpen }) => {
                 setIsCartOpen(true)
             })
             .catch(err => {
-                console.log(err);
                 if (err.response.status === 401) {
                     navigate('/login')
                 } else {
@@ -91,6 +93,7 @@ const CardProduct = ({ product, setIsCartOpen }) => {
                     })
                 }
             })
+            .finally(() => dispatch(setLoadingGlobal(false)))
         setIsCartOpen(false)
     }
 

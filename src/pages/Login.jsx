@@ -1,14 +1,16 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import Swal from 'sweetalert2'
+import { setLoadingGlobal } from '../store/slices/loading.slice'
 import './styles/login.css'
 
 const Login = () => {
     const navigate = useNavigate()
     const { handleSubmit, reset, register } = useForm()
     const [error, setError] = useState("")
+    const dispatch = useDispatch()
 
     const handleSignUp = () => {
         navigate('/signUp')
@@ -16,22 +18,17 @@ const Login = () => {
 
     const submit = (data) => {
         const URL = 'https://e-commerce-api.academlo.tech/api/v1/users/login'
+        dispatch(setLoadingGlobal(true))
         axios.post(URL, data)
             .then(res => {
                 localStorage.setItem("token", res.data.data.token);
                 localStorage.setItem("userName", res.data.data.user.firstName
                     + " " + res.data.data.user.lastName);
                 localStorage.setItem('token', res.data.data.token)
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Login Complete',
-                    showConfirmButton: false,
-                    timer: 1000
-                })
                 navigate('/')
             })
             .catch(() => setError('Invalid Credentials'))
+            .finally(() => dispatch(setLoadingGlobal(false)))
 
         reset({
             email: "",

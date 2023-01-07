@@ -8,7 +8,7 @@ import ProductDescription from '../components/productInfo/ProductDescription'
 // ? Style Css
 import './styles/productInfo.css'
 
-const ProductInfo = () => {
+const ProductInfo = ({ setIsCartOpen }) => {
     const { id } = useParams()
     const allProducts = useSelector(state => state.products)
 
@@ -23,6 +23,11 @@ const ProductInfo = () => {
     }
 
     useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+
         getProductById()
     }, [id])
 
@@ -32,9 +37,10 @@ const ProductInfo = () => {
             setSimilarProducts(pivot)
         }
     }, [allProducts, product])
+
     return (
         <div className='similar__content'>
-            <ProductDescription product={product} />
+            <ProductDescription product={product} setIsCartOpen={setIsCartOpen} />
             <section className='similar__description'>
                 <h2 className='semilar__title'>Discover similar items</h2>
                 <div className='similar__product-container'>

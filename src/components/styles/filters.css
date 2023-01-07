@@ -3,17 +3,14 @@
 }
 
 .filter__content {
-    width: 80%;
-    height: 100vh;
+    width: 95%;
     position: fixed;
     display: flex;
     flex-direction: column;
     top: 50px;
-    left: 0;
+    left: 5px;
     background-color: transparent;
     overflow: hidden;
-    /* 
-    z-index: 2000; */
     background-color: #fff;
 }
 
